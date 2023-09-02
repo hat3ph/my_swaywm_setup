@@ -1,0 +1,2 @@
+# autostart mako notification daemon
+exec mako
