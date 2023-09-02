@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # install sway and other packages
-sudo apt-get install sway swaybg swayidle swaylock xdg-desktop-portal-wlr xwayland foot pipewire wireplumber fonts-noto-color-emoji mako-notifier libnotify-bin thunar gvfs gvfs-backends thunar-archive-plugin thunar-media-tags-plugin -y
+sudo apt-get install sway swaybg swayidle swaylock xdg-desktop-portal-wlr xwayland foot suckless-tools pipewire wireplumber fonts-noto-color-emoji mako-notifier libnotify-bin thunar gvfs gvfs-backends thunar-archive-plugin thunar-media-tags-plugin -y
 
 # copy my swaywm and mako configuration
 mkdir -p $HOME/.config/{sway,mako}
