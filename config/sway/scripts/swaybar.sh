@@ -10,12 +10,12 @@ mem_emoji=🥓
 # current date
 #date_formatted=$(date "+%a %F %H:%M")
 date_formatted=$(date "+%R%p")
-if [ `date +%H` -lt 12 ]; then
-  date_emoji= ^x^`  ^o
-elif [ `date +%H` -lt 18 ]; then
-  date_emoji= ^=^u^r
+if [[ `date +%H` -lt 12 ]]; then
+	date_emoji=☀️
+elif [[ `date +%H` -lt 18 ]]; then
+	date_emoji=🕒
 else
-  date_emoji= ^=^l^|
+	date_emoji=🌜
 fi
 
 # check volume level and status vis pipewire and wireplumber
