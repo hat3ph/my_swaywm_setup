@@ -9,7 +9,7 @@ date_emoji=🕘
 
 # current date
 #date_formatted=$(date "+%a %F %H:%M")
-date_formatted=$(date "+%R")
+date_formatted=$(date "+%R%p")
 
 # check volume level and status vis pipewire and wireplumber
 if [[ -n $(wpctl get-volume @DEFAULT_AUDIO_SINK@ | cut -d ' ' -f 3 | sed 's/^.//;s/.$//') ]]; then
