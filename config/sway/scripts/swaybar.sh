@@ -20,8 +20,10 @@ else
 	volume_level=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | cut -d ' ' -f 2 | awk '{printf "%2.0f%%\n", 100 * $1}')
 fi
 
-# check total cpu usage
+# check total cpu usage and temp
 cpu_usage="$[100-$(vmstat 1 2|tail -1|awk '{print $15}')]"%
+cpu_temp=$(< /sys/class/thermal/thermal_zone0/temp)
+cpu_temp=$(($cpu_temp/1000))
 
 # check total memory usage
 #mem_usage="$(free | grep Mem | awk '{printf "%2.0f%%\n", $3/$2 * 100}')"
@@ -46,7 +48,7 @@ fi
 
 # output to swaybar
 if [[ -d /sys/class/power_supply/BAT0 ]]; then
-	echo $cpu_emoji $cpu_usage $mem_emoji $mem_usage $net_emoji $net_info $battery_emoji $battery_status $volume_emoji $volume_level $date_emoji $date_formatted
+	echo $cpu_emoji $cpu_usage $cpu_temp°C $mem_emoji $mem_usage $net_emoji $net_info $battery_emoji $battery_status $volume_emoji $volume_level $date_emoji $date_formatted
 else
-	echo $cpu_emoji $cpu_usage $mem_emoji $mem_usage $net_emoji $net_info $volume_emoji $volume_level $date_emoji $date_formatted
+	echo $cpu_emoji $cpu_usage $cpu_temp°C $mem_emoji $mem_usage $net_emoji $net_info $volume_emoji $volume_level $date_emoji $date_formatted
 fi
