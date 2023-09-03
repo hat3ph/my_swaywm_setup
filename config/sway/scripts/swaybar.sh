@@ -38,7 +38,7 @@ mem_usage="$(free -h | awk 'NR==2 {print $3}')"
 
 # check network connection
 #net_info="$(ip -o route get to 8.8.8.8 | sed -n 's/.*src \([0-9.]\+\).*/\1/p') ($(ip -o route get to 8.8.8.8 | awk '{print $5}'))"
-ping -q -w 1 -c 1 `ip r | grep default | cut -d ' ' -f 3` > /dev/null && \
+ping -q -w 1 -c 1 `ip r | grep default | grep -v linkdown | cut -d ' ' -f 3` > /dev/null && \
 	net_info="$(ip -o route get to 8.8.8.8 | sed -n 's/.*src \([0-9.]\+\).*/\1/p') ($(ip -o route get to 8.8.8.8 | awk '{print $5}'))" net_emoji=🛜 \
 	|| net_info="Disconnected" net_emoji=⛔
 
