@@ -24,7 +24,8 @@ fi
 cpu_usage="$[100-$(vmstat 1 2|tail -1|awk '{print $15}')]"%
 
 # check total memory usage
-mem_usage="$(free | grep Mem | awk '{printf "%2.0f%%\n", $3/$2 * 100}')"
+#mem_usage="$(free | grep Mem | awk '{printf "%2.0f%%\n", $3/$2 * 100}')"
+mem_usage="$(free -h | awk 'NR==2 {print $3}')"
 
 # check network connection
 #net_info="$(ip -o route get to 8.8.8.8 | sed -n 's/.*src \([0-9.]\+\).*/\1/p') ($(ip -o route get to 8.8.8.8 | awk '{print $5}'))"
