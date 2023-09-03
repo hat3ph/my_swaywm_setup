@@ -10,12 +10,12 @@ mem_emoji=🥓
 # current date
 #date_formatted=$(date "+%a %F %H:%M"%p)
 date_formatted=$(date "+%R%p")
-if [[ `date +"%H"` -gt 6 -a `date +"%H"` -le 12 ]]; then
+if [[ `date +"%H"` -gt 6 ]] && [[ `date +"%H"` -le 12 ]]; then
 	date_emoji=☀️
-elif [[ `date +"%H"` -gt 12 -a `date +"%H"` -le 16 ]]; then 
+elif [[ `date +"%H"` -gt 12 ]] && [[ `date +"%H"` -le 16 ]]; then 
 	date_emoji=🕛
-elif [[ `date +"%H"` -gt 16 -a `date +"%H"` -le 20 ]]; then
-	date_emoji=🕒
+elif [[ `date +"%H"` -gt 16 ]] && [[ `date +"%H"` -le 20 ]]; then
+	date_emoji=🕓
 else
 	date_emoji=🌜
 fi
