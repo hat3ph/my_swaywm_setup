@@ -45,19 +45,20 @@ ping -q -w 1 -c 1 `ip r | grep default | grep -v linkdown | cut -d ' ' -f 3` > /
 # Returns the battery status: "Full", "Discharging", or "Charging".
 if [[ -d /sys/class/power_supply/BAT0 ]]; then
 	battery_status=$(cat /sys/class/power_supply/BAT0/status)
-	if [[ $battery_status == "Discharging" ]] || [[ $battery_status == "Charging" ]]; then
+	battery_capacity=$(cat /sys/class/power_supply/BAT0/capacity)
+	if [[ $battery_status == "FULL" ]]; then
+		battery_emoji=🔌
+	elif [[ $battery_status == "Discharging" ]]; then
+		if [[ $battery_capacity -lt 20 ]]; then notify-send -u critical "Battery capacity less than 20%"; fi
 		battery_emoji=🪫
 	else
 		battery_emoji=🔋
 	fi
-else
-	battery_emoji=🔌
-	battery_status="AC"
 fi
 
 # output to swaybar
 if [[ -d /sys/class/power_supply/BAT0 ]]; then
-	echo $cpu_emoji $cpu_usage $cpu_temp°C $mem_emoji $mem_usage $net_emoji $net_info $battery_emoji $battery_status $volume_emoji $volume_level $date_emoji $date_formatted
+	echo $cpu_emoji $cpu_usage $cpu_temp°C $mem_emoji $mem_usage $net_emoji $net_info $battery_emoji $battery_status $battery_capacity% $volume_emoji $volume_level $date_emoji $date_formatted
 else
 	echo $cpu_emoji $cpu_usage $cpu_temp°C $mem_emoji $mem_usage $net_emoji $net_info $volume_emoji $volume_level $date_emoji $date_formatted
 fi
