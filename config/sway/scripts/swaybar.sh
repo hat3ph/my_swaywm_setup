@@ -3,13 +3,20 @@
 # custom emoji
 cpu_emoji=🍟
 mem_emoji=🥓
-date_emoji=🕘
+#date_emoji=🕘
 #net_emoji=🌐
 #net_emoji=📡
 
 # current date
 #date_formatted=$(date "+%a %F %H:%M")
 date_formatted=$(date "+%R%p")
+if [ `date +%H` -lt 12 ]; then
+  date_emoji= ^x^`  ^o
+elif [ `date +%H` -lt 18 ]; then
+  date_emoji= ^=^u^r
+else
+  date_emoji= ^=^l^|
+fi
 
 # check volume level and status vis pipewire and wireplumber
 if [[ -n $(wpctl get-volume @DEFAULT_AUDIO_SINK@ | cut -d ' ' -f 3 | sed 's/^.//;s/.$//') ]]; then
