@@ -15,6 +15,9 @@ set $term foot
 #set $menu dmenu_path | dmenu | xargs swaymsg exec --
 set $menu dmenu_path | $HOME/.config/sway/scripts/my_dmenu.sh | xargs swaymsg exec --
 
-set $browser firefox
-set $filemanager thunar
+#set $browser firefox
+#set $filemanager thunar
 gaps inner 2
+
+# hide cursor while inactive
+seat * hide_cursor 8000

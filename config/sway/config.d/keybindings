@@ -12,10 +12,10 @@
     bindsym $mod+d exec $menu
     
     # Start firefox browser
-    bindsym $mod+Shift+w exec $browser
+    #bindsym $mod+Shift+w exec $browser
 	
 	# Start thunar file manager
-	bindsym $mod+Shift+f exec $filemanager
+	#bindsym $mod+Shift+f exec $filemanager
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -144,18 +144,21 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 #
-# Pipewire Audio
+# Pipewire Audio keybinds
 #
 # +5% increase default audio level
 bindsym $mod+Shift+Prior exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
+#bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
 # -5% reduce default audio level
 bindsym $mod+Shift+Next exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+#bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
 # toggle mute or unmute default audio
 bindsym $mod+Shift+End exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+#bindsym XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
 # toggle mute or unmute default mic
 #bindsym XF86AudioMicMute exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
 
 #
-# dmenu power options
+# dmenu power options keybinds
 #
 bindsym $mod+Shift+delete exec $HOME/.config/sway/scripts/dmenu_power_options.sh

@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # custom emoji
-cpu_emoji=🍟
-mem_emoji=🥓
+cpu_emoji=
+mem_emoji=
 #date_emoji=🕘
 #net_emoji=🌐
 #net_emoji=📡

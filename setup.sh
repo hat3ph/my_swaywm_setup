@@ -1,7 +1,16 @@
 #!/bin/bash
 
 # install sway and other packages
-sudo apt-get install sway swaybg swayidle swaylock xdg-desktop-portal-wlr xwayland foot suckless-tools pipewire wireplumber fonts-noto-color-emoji mako-notifier libnotify-bin grim thunar gvfs gvfs-backends thunar-archive-plugin thunar-media-tags-plugin -y
+sudo apt-get install sway swaybg swayidle swaylock xdg-desktop-portal-wlr xwayland foot suckless-tools pipewire \
+    wireplumber fonts-noto-color-emoji fonts-font-awesome mako-notifier libnotify-bin grim nano less -y
+
+# optional install extra packages
+extra_pkgs=yes
+
+if [[ $extra_pkgs == "yes" ]]; then
+    sudo apt-get install thunar gvfs gvfs-backends thunar-archive-plugin thunar-media-tags-plugin avahi-daemon \
+        copyq featherpad -y
+fi
 
 # copy my swaywm and mako configuration
 mkdir -p $HOME/.config/{sway,mako}
@@ -9,14 +18,11 @@ cp -r ./config/sway/* $HOME/.config/sway/
 chmod +x $HOME/.config/sway/scripts/*.sh
 cp ./config/mako/config $HOME/.config/mako/
 
-cat >> $HOME/.profile << 'EOF'
+# configure nano with line number
+cp /etc/nanorc $HOME/.nanorc
+sed -i 's/# set const/set const/g' $HOME/.nanorc
 
-export MOZ_ENABLE_WAYLAND=1
-EOF
-
-# setup my customer bash alias
-cat >> $HOME/.bashrc << 'EOF'
-
-alias temps='watch -n 1 sensors amdgpu-* drivetemp-* k10temp-* asus_wmi_sensors-*'
-alias syslog='tail -f /var/log/syslog'
-EOF
+# enable firefox to run in wayland protocol
+if [[ ! $(cat $HOME/.profile | grep "^[^#;]" | grep MOZ_ENABLE_WAYLAND=1 ) ]]; then
+    printf "\nexport MOZ_ENABLE_WAYLAND=1\n"
+fi

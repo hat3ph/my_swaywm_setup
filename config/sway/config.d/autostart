@@ -1,2 +1,8 @@
 # autostart mako notification daemon
 exec mako
+
+# autostart copyq clipboard manager
+#exec copyq
+
+# autostart thunar as daemon
+#exec thunar --daemon
