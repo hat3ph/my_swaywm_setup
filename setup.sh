@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # install sway and other packages
+sudo apt-get update && sudo apt-get upgrade -y
 sudo apt-get install sway swaybg swayidle swaylock xdg-desktop-portal-wlr xwayland foot suckless-tools pipewire \
     wireplumber fonts-noto-color-emoji fonts-font-awesome mako-notifier libnotify-bin grim nano less -y
 
