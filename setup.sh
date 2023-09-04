@@ -26,7 +26,7 @@ if [[ $nm_install == yes ]]; then
 		sudo cp /etc/NetworkManager/NetworkManager.conf /etc/NetworkManager/NetworkManager.conf.bak
 		sudo sed -i 's/managed=false/managed=true/g' /etc/NetworkManager/NetworkManager.conf
         sudo mv /etc/network/interfaces /etc/network/interfaces.bak
-        sudo cp ./interfaces /etc/network/interfaces
+        sudo cp ./config/interfaces /etc/network/interfaces
 	fi
 fi
 
