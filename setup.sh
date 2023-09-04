@@ -15,9 +15,9 @@ fi
 # optional install NetworkManager
 nm_install=yes
 if [[ $nm_install == yes ]]; then
-	sudo apt-get install network-manager
+	sudo apt-get install network-manager -y
 	if [[ -n "$(uname -a | grep Ubuntu)" ]]; then
-		for file in `find /etc/netplan/* -maxdepth 0 -type f -name *.xml`; do
+		for file in `find /etc/netplan/* -maxdepth 0 -type f -name *.yaml`; do
   			sudo mv $file $file.bak
 		done
 		echo -e "# Let NetworkManager manage all devices on this system\nnetwork:\n  version: 2\n  renderer: NetworkManager" | \
