@@ -6,10 +6,25 @@ sudo apt-get install sway swaybg swayidle swaylock xdg-desktop-portal-wlr xwayla
 
 # optional install extra packages
 extra_pkgs=yes
-
 if [[ $extra_pkgs == "yes" ]]; then
     sudo apt-get install thunar gvfs gvfs-backends thunar-archive-plugin thunar-media-tags-plugin avahi-daemon \
         copyq featherpad -y
+fi
+
+# optional install NetworkManager
+nm_install=yes
+if [[ $nm_install == yes ]]; then
+	sudo apt-get install network-manager
+	if [[ -n "$(uname -a | grep Ubuntu)" ]]; then
+		for file in `find /etc/netplan/* -maxdepth 0 -type f -name *.xml`; do
+  			sudo mv $file $file.bak
+		done
+		echo -e "# Let NetworkManager manage all devices on this system\nnetwork:\n  version: 2\n  renderer: NetworkManager" | \
+            sudo tee /etc/netplan/01-network-manager-all.yaml
+	else
+		sudo cp /etc/NetworkManager/NetworkManager.conf /etc/NetworkManager/NetworkManager.conf.bak
+		sudo sed -i 's/managed=false/managed=true/g' /etc/NetworkManager/NetworkManager.conf
+	fi
 fi
 
 # copy my swaywm and mako configuration
