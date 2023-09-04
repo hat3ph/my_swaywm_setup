@@ -26,7 +26,7 @@ cp /etc/nanorc $HOME/.nanorc
 sed -i 's/# set const/set const/g' $HOME/.nanorc
 
 # enable firefox to run in wayland protocol
-if [[ -f $HOME/.profile ]]; then mv $HOME/.profile $HOME/.profile_`date +%Y_%d_%m_%H_%M_%S`; fi
+if [[ -f $HOME/.profile ]]; then cp $HOME/.profile $HOME/.profile_`date +%Y_%d_%m_%H_%M_%S`; fi
 if [[ ! $(cat $HOME/.profile | grep "^[^#;]" | grep MOZ_ENABLE_WAYLAND=1 ) ]]; then
     printf "\nexport MOZ_ENABLE_WAYLAND=1\n"
 fi
