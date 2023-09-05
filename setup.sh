@@ -2,20 +2,20 @@
 
 # install sway and other packages
 sudo apt-get update && sudo apt-get upgrade -y
-sudo apt-get install sway swaybg swayidle swaylock xdg-desktop-portal-wlr xwayland foot suckless-tools pipewire \
-    wireplumber fonts-noto-color-emoji fonts-font-awesome mako-notifier libnotify-bin grim nano less -y
+sudo apt-get install sway swaybg swayidle swaylock xdg-desktop-portal-wlr xwayland foot suckless-tools \
+	fonts-noto-color-emoji fonts-font-awesome mako-notifier libnotify-bin grim imagemagick nano less iputils-ping -y
 
-# optional install extra packages
-extra_pkgs=yes
-if [[ $extra_pkgs == "yes" ]]; then
-    sudo apt-get install thunar gvfs gvfs-backends thunar-archive-plugin thunar-media-tags-plugin avahi-daemon \
-        copyq featherpad -y
+# optional install thunar and extra packages
+thunar=no
+if [[ $thunar == "yes" ]]; then
+	sudo apt-get install thunar gvfs gvfs-backends thunar-archive-plugin thunar-media-tags-plugin avahi-daemon \
+ 		copyq featherpad -y
 fi
 
 # optional install NetworkManager
-nm_install=yes
-if [[ $nm_install == yes ]]; then
-	sudo apt-get install network-manager -y
+nm=no
+if [[ $nm == yes ]]; then
+sudo apt-get install network-manager -y
 	if [[ -n "$(uname -a | grep Ubuntu)" ]]; then
 		for file in `find /etc/netplan/* -maxdepth 0 -type f -name *.yaml`; do
   			sudo mv $file $file.bak
@@ -25,8 +25,8 @@ if [[ $nm_install == yes ]]; then
 	else
 		sudo cp /etc/NetworkManager/NetworkManager.conf /etc/NetworkManager/NetworkManager.conf.bak
 		sudo sed -i 's/managed=false/managed=true/g' /etc/NetworkManager/NetworkManager.conf
-        sudo mv /etc/network/interfaces /etc/network/interfaces.bak
-        sudo cp ./config/interfaces /etc/network/interfaces
+        	sudo mv /etc/network/interfaces /etc/network/interfaces.bak
+        	sudo cp ./config/interfaces /etc/network/interfaces
 	fi
 fi
 
