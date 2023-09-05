@@ -21,12 +21,22 @@ else
 fi
 
 # check audio volume level and status vis pipewire and wireplumber
-if [[ -n $(wpctl get-volume @DEFAULT_AUDIO_SINK@ | cut -d ' ' -f 3 | sed 's/^.//;s/.$//') ]]; then
-	volume_emoji=🔇
-	volume_level="MUTED"
+if [[ ! $(command -v pactl) ]]; then
+	if [[ -n $(wpctl get-volume @DEFAULT_AUDIO_SINK@ | cut -d ' ' -f 3 | sed 's/^.//;s/.$//') ]]; then
+		volume_emoji=🔇
+		volume_level="MUTED"
+	else
+		volume_emoji=🔊
+		volume_level=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | cut -d ' ' -f 2 | awk '{printf "%2.0f%%\n", 100 * $1}')
+	fi
 else
-	volume_emoji=🔊
-	volume_level=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | cut -d ' ' -f 2 | awk '{printf "%2.0f%%\n", 100 * $1}')
+	if [[ $(pactl list sinks | grep Mute: | awk '{print $2}') == "yes" ]]; then
+		volume_emoji=🔇
+		volume_level="MUTED"
+	else
+		volume_emoji=🔊
+		volume_level=$(pactl list sinks | grep Volume | head -n1 | awk '{print $5}')
+	fi
 fi
 
 # check total cpu usage and temp

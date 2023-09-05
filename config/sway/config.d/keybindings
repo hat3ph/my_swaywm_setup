@@ -144,7 +144,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 #
-# Pipewire Audio keybinds
+# Wireplumber Audio keybinds
 #
 # +5% increase default audio level
 bindsym $mod+Shift+Prior exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
@@ -157,6 +157,21 @@ bindsym $mod+Shift+End exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
 #bindsym XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
 # toggle mute or unmute default mic
 #bindsym XF86AudioMicMute exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+
+#
+# Pulseaudio Utility Audio keybinds
+#
+# +5% increase default audio level
+bindsym $mod+Shift+Prior exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+#bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+# -5% reduce default audio level
+bindsym $mod+Shift+Next exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+#bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+# toggle mute or unmute default audio
+bindsym $mod+Shift+End exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+#bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+# toggle mute or unmute default mic
+#bindsym XF86AudioMicMute exec pactl set-sink-mute @DEFAULT_SOURCE@ toggle
 
 #
 # dmenu power options keybinds

@@ -5,6 +5,14 @@ sudo apt-get update && sudo apt-get upgrade -y
 sudo apt-get install sway swaybg swayidle swaylock xdg-desktop-portal-wlr xwayland foot suckless-tools \
 	fonts-noto-color-emoji fonts-font-awesome mako-notifier libnotify-bin grim imagemagick nano less iputils-ping -y
 
+# use pipewire with wireplumber or pulseaudio-utils
+wireplumber=yes
+if [[ $wireplumber == "yes" ]]; then
+	sudo apt-get install pipewire pipewire-pulse wireplumber -y
+else
+	sudo apt-get install pipewire pipewire-media-session pulseaudio pulseaudio-utils -y
+fi
+
 # optional install thunar and extra packages
 thunar=no
 if [[ $thunar == "yes" ]]; then
