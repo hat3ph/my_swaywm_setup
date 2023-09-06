@@ -1,6 +1,6 @@
 # My SwayWM Setup
 
-My Sway WN setup in Ubuntu 22.04/23.04 and Debian 12.
+I want to test out wayland and this is my Sway WN setup on Ubuntu 22.04/23.04 and Debian 12.
 
 I test this installation script using Ubuntu 22.04/23.04 and Debian 12 minimal based installation.
 
@@ -48,6 +48,7 @@ Pls refer to [sway man page](https://man.archlinux.org/man/sway.5) for more info
 - [sway-on-ubuntu](https://llandy3d.github.io/sway-on-ubuntu/extra/)
 - [Swaybar example](https://unix.stackexchange.com/questions/473788/simple-swaybar-example)
 - [Daniel W Armstong](https://www.dwarmstrong.org/sway/)
+- [Sway's Wiki](https://github.com/swaywm/sway/wiki)
 - [emoji1](https://github.com/dln/wofi-emoji/blob/master/wofi-emoji)
 - [emoji2](https://gist.github.com/Sebas-h/36ad7fa40c39a28ba00dedd2cf1d4e8e)
 - [emoji3](https://git.sr.ht/~earboxer/dotfiles/tree/master/item/.config/sxmo/hooks/sxmo_hook_icons.sh)
