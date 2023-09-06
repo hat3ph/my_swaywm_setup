@@ -47,7 +47,7 @@ install () {
 	fi
 
  	# copy my swaywm and mako configuration
-  	if [[ $my_swaywm_setup == "yes" ]]; then
+  	if [[ $my_swaywm_config == "yes" ]]; then
 		if [[ -d $HOME/.config/sway ]]; then mv $HOME/.config/sway $HOME/.config/sway_`date +%Y_%d_%m_%H_%M_%S`; fi
 		if [[ -d $HOME/.config/mako ]]; then mv $HOME/.config/mako $HOME/.config/mako`date +%Y_%d_%m_%H_%M_%S`; fi
 		mkdir -p $HOME/{Documents,Downloads,Music,Pictures,Videos}
@@ -74,16 +74,16 @@ install () {
 }
 
 printf "\n"
-printf "Start installation!!!!!!!!\n"
-printf "888888888888888888888888888\n"
-printf "My Custom Swaywm Setup : $my_swaywm_setup\n"
-printf "Pipewire               : $audio\n"
-printf "Wireplumber            : $wireplumber\n"
-printf "Thunar                 : $thunar\n"
-printf "NetworkManager         : $nm\n"
-printf "Nano's configuration   : $nano_config\n"
-printf "MOZ_ENABLE_WAYLAND     : $moz_enable\n"
-printf "888888888888888888888888888\n"
+printf "Start installation!!!!!!!!!!!\n"
+printf "88888888888888888888888888888\n"
+printf "My Custom Swaywm Config : $my_swaywm_config\n"
+printf "Pipewire                : $audio\n"
+printf "Wireplumber             : $wireplumber\n"
+printf "Thunar                  : $thunar\n"
+printf "NetworkManager          : $nm\n"
+printf "Nano's configuration    : $nano_config\n"
+printf "MOZ_ENABLE_WAYLAND      : $moz_enable\n"
+printf "88888888888888888888888888888\n"
 
 while true; do
 read -p "Do you want to proceed with above settings? (y/n) " yn
