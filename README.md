@@ -11,8 +11,9 @@ Simply clone the repository and run `setup.sh` to start the installation:
 ```
 sudo apt-get install nano git
 git clone https://github.com/hat3ph/my_swaywm_setup.git
-chmod +x ./my_swaywm_setup/setup.sh
-./my_swaywm_setup/setup.sh
+cd my_swaywm_setup
+chmod +x setup.sh
+./setup.sh
 ```
 *Note that super user priviledges are needed to run the installation script.*
 
