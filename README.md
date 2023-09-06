@@ -22,12 +22,13 @@ Before start the installation, recommend to check out `setup.sh` and disable/ena
 By default, it will auto install the sway wm packages. If your Ubuntu/Debian base OS is using the minimal server ISO installation, recommend to install all to have a proper functional system. 
 ```
 # optional components installation
-audio=yes
-wireplumber=yes
-thunar=yes
-nm=yes
-nano_config=yes
-moz_enable=yes
+my_swaywm_config=yes # set no if just want an empty swaywm setup
+audio=yes # set no if do not want to use pipewire audio server
+wireplumber=yes # set no if want to use pulseaudio-utils for pipewire audio management
+thunar=yes # set no if do not want to use thunar file manager
+nm=yes # set no if do not want to use network-manager for network interface management
+nano_config=yes # set no if do not want to configure nano text editor
+moz_enable=yes # set no if do not use firefox web browser
 ```
 ## Ubuntu 22.04 Bugs (Can ignore this if using Ubuntu 23.04 or Debian 12)
 - Ubuntu 22.04 come with wireplumber-0.4.8 that do not have the get-volume function. If you don't minds loosing the audio volume level at your swaybar, continue to use wireplumber for audio management, or just set `wireplumber=no` and it will install pulseaudio-utils for audio management.
