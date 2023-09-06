@@ -1,27 +1,34 @@
 #!/bin/bash
 
+# optional components installation
+audio=yes
+wireplumber=yes
+thunar=yes
+nm=yes
+nano_config=yes
+moz_enable=yes
+
 # install sway and other packages
 sudo apt-get update && sudo apt-get upgrade -y
 sudo apt-get install sway swaybg swayidle swaylock xdg-desktop-portal-wlr xwayland foot suckless-tools \
 	fonts-noto-color-emoji fonts-font-awesome mako-notifier libnotify-bin grim imagemagick nano less iputils-ping -y
 
 # use pipewire with wireplumber or pulseaudio-utils
-wireplumber=yes
-if [[ $wireplumber == "yes" ]]; then
-	sudo apt-get install pipewire pipewire-pulse wireplumber -y
-else
-	sudo apt-get install pipewire pipewire-media-session pulseaudio pulseaudio-utils -y
+if [[ $audio == "yes" ]]; then
+	if [[ $wireplumber == "yes" ]]; then
+		sudo apt-get install pipewire pipewire-pulse wireplumber -y
+	else
+		sudo apt-get install pipewire pipewire-media-session pulseaudio pulseaudio-utils -y
+	fi
 fi
 
 # optional install thunar and extra packages
-thunar=no
 if [[ $thunar == "yes" ]]; then
 	sudo apt-get install thunar gvfs gvfs-backends thunar-archive-plugin thunar-media-tags-plugin avahi-daemon \
- 		copyq featherpad -y
+		copyq featherpad -y
 fi
 
 # optional install NetworkManager
-nm=no
 if [[ $nm == yes ]]; then
 sudo apt-get install network-manager -y
 	if [[ -n "$(uname -a | grep Ubuntu)" ]]; then
@@ -47,12 +54,16 @@ chmod +x $HOME/.config/sway/scripts/*.sh
 cp ./config/mako/config $HOME/.config/mako/
 
 # configure nano with line number
-if [[ -f $HOME/.nanorc ]]; then mv $HOME/.nanorc $HOME/.nanorc_`date +%Y_%d_%m_%H_%M_%S`; fi
-cp /etc/nanorc $HOME/.nanorc
-sed -i 's/# set const/set const/g' $HOME/.nanorc
+if [[ $nano_config == "yes" ]]; then
+	if [[ -f $HOME/.nanorc ]]; then mv $HOME/.nanorc $HOME/.nanorc_`date +%Y_%d_%m_%H_%M_%S`; fi
+	cp /etc/nanorc $HOME/.nanorc
+	sed -i 's/# set const/set const/g' $HOME/.nanorc
+fi
 
 # enable firefox to run in wayland protocol
-if [[ -f $HOME/.profile ]]; then cp $HOME/.profile $HOME/.profile_`date +%Y_%d_%m_%H_%M_%S`; fi
-if [[ ! $(cat $HOME/.profile | grep "^[^#;]" | grep MOZ_ENABLE_WAYLAND=1 ) ]]; then
-    echo -e "\nexport MOZ_ENABLE_WAYLAND=1\n" >> $HOME/.profile
+if [[ $moz_enable == "yes" ]]; then
+	if [[ -f $HOME/.profile ]]; then cp $HOME/.profile $HOME/.profile_`date +%Y_%d_%m_%H_%M_%S`; fi
+	if [[ ! $(cat $HOME/.profile | grep "^[^#;]" | grep MOZ_ENABLE_WAYLAND=1 ) ]]; then
+		echo -e "\nexport MOZ_ENABLE_WAYLAND=1\n" >> $HOME/.profile
+	fi
 fi

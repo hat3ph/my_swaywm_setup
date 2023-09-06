@@ -3,11 +3,8 @@
 # custom emoji
 cpu_emoji=
 mem_emoji=
-#date_emoji=🕘
-#net_emoji=🌐
-#net_emoji=📡
 
-# current date
+# output current date
 #date_formatted=$(date "+%a %F %H:%M"%p)
 date_formatted=$(date "+%R%p")
 if [[ `date +"%H"` -gt 6 ]] && [[ `date +"%H"` -le 12 ]]; then
@@ -20,7 +17,7 @@ else
 	date_emoji=🌜
 fi
 
-# check audio volume level and status vis pipewire and wireplumber
+# check pipewire audio volume level and status vis wireplumber or pulseaudio-utils
 if [[ ! $(command -v pactl) ]]; then
 	if [[ -n $(wpctl get-volume @DEFAULT_AUDIO_SINK@ | cut -d ' ' -f 3 | sed 's/^.//;s/.$//') ]]; then
 		volume_emoji=🔇
@@ -70,6 +67,7 @@ fi
 
 # output to swaybar
 if [[ -d /sys/class/power_supply/BAT0 ]]; then
+	# for laptop usage only
 	echo $cpu_emoji $cpu_usage $cpu_temp°C $mem_emoji $mem_usage $net_emoji $net_info $battery_emoji $battery_status $battery_capacity% \
 		$volume_emoji $volume_level $date_emoji $date_formatted
 else

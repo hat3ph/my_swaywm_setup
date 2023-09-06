@@ -17,7 +17,15 @@ set $menu dmenu_path | $HOME/.config/sway/scripts/my_dmenu.sh | xargs swaymsg ex
 
 #set $browser firefox
 #set $filemanager thunar
+
+# set default windows opacity
+set $opacity 0.8
+
+# set windows inner gap
 gaps inner 2
 
 # hide cursor while inactive
 seat * hide_cursor 8000
+
+# disable windows focus on mouse
+focus_follows_mouse no

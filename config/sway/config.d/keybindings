@@ -144,7 +144,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 #
-# Wireplumber Audio keybinds
+# Wireplumber Audio keybinds. Change to use XF86Audio keybind multimedia keyboard
 #
 # +5% increase default audio level
 bindsym $mod+Shift+Prior exec wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+
@@ -159,7 +159,7 @@ bindsym $mod+Shift+End exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
 #bindsym XF86AudioMicMute exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
 
 #
-# Pulseaudio Utility Audio keybinds
+# Pulseaudio Utility Audio keybinds. Change to use XF86Audio keybind multimedia keyboard
 #
 # +5% increase default audio level
 #bindsym $mod+Shift+Prior exec $HOME/.config/sway/scripts/pactl_increase_vol.sh +5%

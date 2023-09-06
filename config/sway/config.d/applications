@@ -1,0 +1,5 @@
+# set transparency to foot terminal
+for_window [app_id="foor"] opacity $opacity
+
+# set floating windows
+for_window [app_id="software-properties-gtk"] floating enable
