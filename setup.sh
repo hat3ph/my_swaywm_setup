@@ -76,7 +76,7 @@ install () {
 
 	# configure gtk theme for sway/wayland
 	mkdir -p $HOME/.config/gtk-3.0
-	cp ./settings.ini $HOME/.config/gtk3.0/settings.ini
+	cp ./config/settings.ini $HOME/.config/gtk3.0/settings.ini
 }
 
 printf "\n"
