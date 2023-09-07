@@ -15,3 +15,4 @@ include $HOME/.config/sway/config.d/idle
 include $HOME/.config/sway/config.d/statusbar
 include $HOME/.config/sway/config.d/autostart
 include $HOME/.config/sway/config.d/applications
+include $HOME/.config/sway/config.d/theme

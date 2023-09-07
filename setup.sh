@@ -7,13 +7,14 @@ wireplumber=yes # set no if want to use pulseaudio-utils for pipewire audio mana
 thunar=yes # set no if do not want to use thunar file manager
 nm=yes # set no if do not want to use network-manager for network interface management
 nano_config=yes # set no if do not want to configure nano text editor
-autostart_sway=yes # set no to not autostart swaywm once TUI login
+autostart_sway=yes # set no to not autostart swaywm once TUI
 
 install () {
 	# install swaywm and other packages
 	sudo apt-get update && sudo apt-get upgrade -y
 	sudo apt-get install sway swaybg swayidle swaylock xdg-desktop-portal-wlr xwayland foot suckless-tools \
-		fonts-noto-color-emoji fonts-font-awesome mako-notifier libnotify-bin grim imagemagick nano less iputils-ping -y
+		fonts-noto-color-emoji fonts-font-awesome mako-notifier libnotify-bin grim imagemagick nano less iputils-ping \
+		adwaita-icon-theme papirus-icon-theme qt5ct -y
 
 	# use pipewire with wireplumber or pulseaudio-utils
 	if [[ $audio == "yes" ]]; then
@@ -68,9 +69,14 @@ install () {
 	# enable autostart swaywm after TUI login
 	if [[ $autostart_sway == "yes" ]]; then
 		if [[ -f $HOME/.bashrc ]]; then cp $HOME/.bashrc $HOME/.bashrc_`date +%Y_%d_%m_%H_%M_%S`; fi
-		sudo cp ./start_swaywm.sh /usr/local/bin/start_swaywm.sh
+		sudo cp ./config/start_swaywm.sh /usr/local/bin/start_swaywm.sh
+		sudo chmod +x /usr/local/bin/start_swaywm.sh
 		echo -e '\n#If running from tty1 start sway\n[ "$(tty)" = "/dev/tty1" ] && /usr/local/bin/start_sway.sh' >> $HOME/.bashrc
 	fi
+
+	# configure gtk theme for sway/wayland
+	mkdir -p $HOME/.config/gtk-3.0
+	cp ./settings.ini $HOME/.config/gtk3.0/settings.ini
 }
 
 printf "\n"
