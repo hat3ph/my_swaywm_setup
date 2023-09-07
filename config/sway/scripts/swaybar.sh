@@ -15,7 +15,7 @@ case $(date +%H) in
 		date_emoji=☀️
 	;;
 	12 | 13 | 14 | 15 | 16 | 17)
-		date_emoji=🍱
+		date_emoji=🥪
 	;;
 	18 | 19 | 20 | 21)
 		date_emoji=🍽️
