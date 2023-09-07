@@ -71,7 +71,7 @@ install () {
 		if [[ -f $HOME/.bashrc ]]; then cp $HOME/.bashrc $HOME/.bashrc_`date +%Y_%d_%m_%H_%M_%S`; fi
 		sudo cp ./config/start_swaywm.sh /usr/local/bin/start_swaywm.sh
 		sudo chmod +x /usr/local/bin/start_swaywm.sh
-		echo -e '\n#If running from tty1 start sway\n[ "$(tty)" = "/dev/tty1" ] && /usr/local/bin/start_sway.sh' >> $HOME/.bashrc
+		echo -e '\n#If running from tty1 start sway\n[ "$(tty)" = "/dev/tty1" ] && /usr/local/bin/start_swaywm.sh' >> $HOME/.bashrc
 	fi
 
 	# configure gtk theme for sway/wayland
