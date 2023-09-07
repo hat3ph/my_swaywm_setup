@@ -88,7 +88,7 @@ printf "Wireplumber             : $wireplumber\n"
 printf "Thunar                  : $thunar\n"
 printf "NetworkManager          : $nm\n"
 printf "Nano's configuration    : $nano_config\n"
-printf "Autostart SwayWM        : $autostart_swaywm\n"
+printf "Autostart SwayWM        : $autostart_sway\n"
 printf "88888888888888888888888888888\n"
 
 while true; do
