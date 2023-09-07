@@ -30,6 +30,17 @@ nm=yes # set no if do not want to use network-manager for network interface mana
 nano_config=yes # set no if do not want to configure nano text editor
 autostart_sway=yes # set no to not autostart swaywm once TUI login
 ```
+## GTK & QT Theming
+Since there is no official wayland GTK3 theme configurator in Ubuntu/Debian yet, you have to edit `$HOME/.config/gtk-3.0/settings.ini` to change the icon theme.
+```
+gtk-theme-name=Papirus
+gtk-application-prefer-dark-theme=true
+gtk-icon-theme-name=Papirus-Dark
+gtk-cursor-theme-name=Papirus
+gtk-font-name=Sans Serif 9
+```
+For QT, use `qt5ct` to change QT applications theme.
+
 ## Ubuntu 22.04 Bugs (Can ignore this if using Ubuntu 23.04 or Debian 12)
 - Ubuntu 22.04 come with wireplumber-0.4.8 that do not have the get-volume function. If you don't minds loosing the audio volume level at your swaybar, continue to use wireplumber for audio management, or just set `wireplumber=no` and it will install pulseaudio-utils for audio management.
 
