@@ -7,15 +7,23 @@ mem_emoji=
 # output current date
 #date_formatted=$(date "+%a %F %H:%M"%p)
 date_formatted=$(date "+%R%p")
-if [[ `date +"%H"` -gt 6 ]] && [[ `date +"%H"` -le 12 ]]; then
-	date_emoji=☀️
-elif [[ `date +"%H"` -gt 12 ]] && [[ `date +"%H"` -le 16 ]]; then 
-	date_emoji=🕛
-elif [[ `date +"%H"` -gt 16 ]] && [[ `date +"%H"` -le 20 ]]; then
-	date_emoji=🕓
-else
-	date_emoji=🌜
-fi
+case $(date +%H) in
+	00 | 01 | 02 | 03 | 04 | 05)
+		date_emoji=🌜
+	;;
+	06 | 07 | 08 | 09 | 10 | 11)
+		date_emoji=☀️
+	;;
+	12 | 13 | 14 | 15 | 16 | 17)
+		date_emoji=🍱
+	;;
+	18 | 19 | 20 | 21)
+		date_emoji=🍽️
+	;;
+	22 | 23 | 24)
+		date_emoji=🌜
+	;;
+esac
 
 # check pipewire audio volume level and status vis wireplumber or pulseaudio-utils
 if [[ ! $(command -v pactl) ]]; then
