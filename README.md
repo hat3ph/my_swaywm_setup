@@ -28,7 +28,7 @@ wireplumber=yes # set no if want to use pulseaudio-utils for pipewire audio mana
 thunar=yes # set no if do not want to use thunar file manager
 nm=yes # set no if do not want to use network-manager for network interface management
 nano_config=yes # set no if do not want to configure nano text editor
-moz_enable=yes # set no if do not use firefox web browser
+autostart_sway=yes # set no to not autostart swaywm once TUI login
 ```
 ## Ubuntu 22.04 Bugs (Can ignore this if using Ubuntu 23.04 or Debian 12)
 - Ubuntu 22.04 come with wireplumber-0.4.8 that do not have the get-volume function. If you don't minds loosing the audio volume level at your swaybar, continue to use wireplumber for audio management, or just set `wireplumber=no` and it will install pulseaudio-utils for audio management.

@@ -7,7 +7,7 @@ wireplumber=yes # set no if want to use pulseaudio-utils for pipewire audio mana
 thunar=yes # set no if do not want to use thunar file manager
 nm=yes # set no if do not want to use network-manager for network interface management
 nano_config=yes # set no if do not want to configure nano text editor
-moz_enable=yes # set no if do not use firefox web browser
+autostart_sway=yes # set no to not autostart swaywm once TUI login
 
 install () {
 	# install swaywm and other packages
@@ -65,12 +65,11 @@ install () {
 		sed -i 's/# set const/set const/g' $HOME/.nanorc
 	fi
 
-	# enable firefox to run in wayland protocol
-	if [[ $moz_enable == "yes" ]]; then
-		if [[ -f $HOME/.profile ]]; then cp $HOME/.profile $HOME/.profile_`date +%Y_%d_%m_%H_%M_%S`; fi
-		if [[ ! $(cat $HOME/.profile | grep "^[^#;]" | grep MOZ_ENABLE_WAYLAND=1 ) ]]; then
-			echo -e "\nexport MOZ_ENABLE_WAYLAND=1\n" >> $HOME/.profile
-		fi
+	# enable autostart swaywm after TUI login
+	if [[ $autostart_sway == "yes" ]]; then
+		if [[ -f $HOME/.bashrc ]]; then cp $HOME/.bashrc $HOME/.bashrc_`date +%Y_%d_%m_%H_%M_%S`; fi
+		sudo cp ./start_swaywm.sh /usr/local/bin/start_swaywm.sh
+		echo -e '\n#If running from tty1 start sway\n[ "$(tty)" = "/dev/tty1" ] && /usr/local/bin/start_sway.sh' >> $HOME/.bashrc
 	fi
 }
 
@@ -83,7 +82,7 @@ printf "Wireplumber             : $wireplumber\n"
 printf "Thunar                  : $thunar\n"
 printf "NetworkManager          : $nm\n"
 printf "Nano's configuration    : $nano_config\n"
-printf "MOZ_ENABLE_WAYLAND      : $moz_enable\n"
+printf "Autostart SwayWM        : $autostart_swaywm\n"
 printf "88888888888888888888888888888\n"
 
 while true; do
