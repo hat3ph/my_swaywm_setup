@@ -30,6 +30,10 @@ nm=yes # set no if do not want to use network-manager for network interface mana
 nano_config=yes # set no if do not want to configure nano text editor
 autostart_sway=yes # set no to not autostart swaywm once TUI login
 ```
+## Login Manager
+SDDM work on sway but I notice it will pull xorg packages as dependency. So I just configure to auto run sway after TUI login.
+If you want to use your prefered login manager, set `autostart_sway=no` and install your login manager manually afterward.
+
 ## GTK & QT Theming
 Since there is no official wayland GTK3 theme configurator in Ubuntu/Debian yet, you have to edit `$HOME/.config/gtk-3.0/settings.ini` to change the icon theme.
 ```
