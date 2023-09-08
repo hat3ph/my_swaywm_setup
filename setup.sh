@@ -3,7 +3,6 @@
 # optional components installation
 my_swaywm_config=yes # set no if just want an empty swaywm setup
 audio=yes # set no if do not want to use pipewire audio server
-wireplumber=yes # set no if want to use pulseaudio-utils for pipewire audio management
 extra_pkg=yes # set no if do not want to install the extra packages
 nm=yes # set no if do not want to use network-manager for network interface management
 nano_config=yes # set no if do not want to configure nano text editor
@@ -14,11 +13,12 @@ install () {
 	sudo apt-get update && sudo apt-get upgrade -y
 	sudo apt-get install sway swaybg swayidle swaylock xdg-desktop-portal-wlr xwayland foot suckless-tools \
 		fonts-noto-color-emoji fonts-font-awesome mako-notifier libnotify-bin grim imagemagick nano less iputils-ping \
-		adwaita-icon-theme papirus-icon-theme qt5ct grimshot xdg-utils -y
+		adwaita-icon-theme papirus-icon-theme qt5ct grimshot xdg-utils qtwayland5 -y
 
 	# use pipewire with wireplumber or pulseaudio-utils
 	if [[ $audio == "yes" ]]; then
-		if [[ $wireplumber == "yes" ]]; then
+		# install pulseaudio-utils to audio management for Ubuntu 22.04 due to out-dated wireplumber packages
+		if [[ ! $(cat /etc/os-release | awk 'NR==3' | cut -c12-) == "22.04" ]]; then
 			sudo apt-get install pipewire pipewire-pulse wireplumber -y
 		else
 			sudo apt-get install pipewire pipewire-media-session pulseaudio pulseaudio-utils -y
@@ -28,7 +28,7 @@ install () {
 	# optional to insstall the extra packages
 	if [[ $extra_pkg == "yes" ]]; then
 		sudo apt-get install thunar gvfs gvfs-backends thunar-archive-plugin thunar-media-tags-plugin avahi-daemon \
-			lximage-qt geany -y
+			lximage-qt geany qpdfview -y
 	fi
 
 	# optional install NetworkManager
@@ -77,7 +77,7 @@ install () {
 
 	# configure gtk theme for sway/wayland
 	mkdir -p $HOME/.config/gtk-3.0
-	cp ./config/settings.ini $HOME/.config/gtk3.0/settings.ini
+	cp ./config/settings.ini $HOME/.config/gtk-3.0/settings.ini
 
 	# create default application mimeapps.list
 	mkdir -p $HOME/.config
@@ -88,9 +88,8 @@ printf "\n"
 printf "Start installation!!!!!!!!!!!\n"
 printf "88888888888888888888888888888\n"
 printf "My Custom Swaywm Config : $my_swaywm_config\n"
-printf "Pipewire                : $audio\n"
-printf "Wireplumber             : $wireplumber\n"
-printf "Thunar                  : $thunar\n"
+printf "Pipewire Audio          : $audio\n"
+printf "Extra Packages          : $extra_pkg\n"
 printf "NetworkManager          : $nm\n"
 printf "Nano's configuration    : $nano_config\n"
 printf "Autostart SwayWM        : $autostart_sway\n"

@@ -24,7 +24,6 @@ By default, it will auto install the sway wm packages. If your Ubuntu/Debian bas
 # optional components installation
 my_swaywm_config=yes # set no if just want an empty swaywm setup
 audio=yes # set no if do not want to use pipewire audio server
-wireplumber=yes # set no if want to use pulseaudio-utils for pipewire audio management
 extra_pkg=yes # set no if do not want to install the extra packages
 nm=yes # set no if do not want to use network-manager for network interface management
 nano_config=yes # set no if do not want to configure nano text editor
