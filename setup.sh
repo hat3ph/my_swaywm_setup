@@ -18,7 +18,7 @@ install () {
 	# use pipewire with wireplumber or pulseaudio-utils
 	if [[ $audio == "yes" ]]; then
 		# install pulseaudio-utils to audio management for Ubuntu 22.04 due to out-dated wireplumber packages
-		if [[ ! $(cat /etc/os-release | awk 'NR==3' | cut -c12-) == "22.04" ]]; then
+		if [[ ! $(cat /etc/os-release | awk 'NR==3' | cut -c12- | sed s/\"//g) == "22.04" ]]; then
 			sudo apt-get install pipewire pipewire-pulse wireplumber -y
 		else
 			sudo apt-get install pipewire pipewire-media-session pulseaudio pulseaudio-utils -y
