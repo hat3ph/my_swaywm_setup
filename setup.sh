@@ -15,40 +15,6 @@ install () {
 		fonts-noto-color-emoji fonts-font-awesome mako-notifier libnotify-bin grim imagemagick nano less iputils-ping \
 		adwaita-icon-theme papirus-icon-theme qt5ct grimshot xdg-utils qtwayland5 -y
 
-	# use pipewire with wireplumber or pulseaudio-utils
-	if [[ $audio == "yes" ]]; then
-		# install pulseaudio-utils to audio management for Ubuntu 22.04 due to out-dated wireplumber packages
-		if [[ ! $(cat /etc/os-release | awk 'NR==3' | cut -c12- | sed s/\"//g) == "22.04" ]]; then
-			sudo apt-get install pipewire pipewire-pulse wireplumber -y
-		else
-			sudo apt-get install pipewire pipewire-media-session pulseaudio pulseaudio-utils -y
-		fi
-	fi
-
-	# optional to insstall the extra packages
-	if [[ $extra_pkg == "yes" ]]; then
-		sudo apt-get install thunar gvfs gvfs-backends thunar-archive-plugin thunar-media-tags-plugin avahi-daemon \
-			lximage-qt geany qpdfview -y
-	fi
-
-	# optional install NetworkManager
-	if [[ $nm == yes ]]; then
-	sudo apt-get install network-manager -y
-		if [[ -n "$(uname -a | grep Ubuntu)" ]]; then
-			for file in `find /etc/netplan/* -maxdepth 0 -type f -name *.yaml`; do
-				sudo mv $file $file.bak
-			done
-			echo -e "# Let NetworkManager manage all devices on this system\nnetwork:\n  version: 2\n  renderer: NetworkManager" | \
-				sudo tee /etc/netplan/01-network-manager-all.yaml
-		else
-			sudo cp /etc/NetworkManager/NetworkManager.conf /etc/NetworkManager/NetworkManager.conf.bak
-			sudo sed -i 's/managed=false/managed=true/g' /etc/NetworkManager/NetworkManager.conf
-			sudo mv /etc/network/interfaces /etc/network/interfaces.bak
-			sudo cp ./config/interfaces /etc/network/interfaces
-			sudo systemctl disable networking.service
-		fi
-	fi
-
 	# copy my swaywm and mako configuration
 	if [[ $my_swaywm_config == "yes" ]]; then
 		if [[ -d $HOME/.config/sway ]]; then mv $HOME/.config/sway $HOME/.config/sway_`date +%Y_%d_%m_%H_%M_%S`; fi
@@ -80,8 +46,45 @@ install () {
 	cp ./config/settings.ini $HOME/.config/gtk-3.0/settings.ini
 
 	# create default application mimeapps.list
-	mkdir -p $HOME/.config
-	cp ./config/mimeapps.list $HOME/.config/mimeapps.list
+	#mkdir -p $HOME/.config
+	#cp ./config/mimeapps.list $HOME/.config/mimeapps.list
+
+	# use pipewire with wireplumber or pulseaudio-utils
+	if [[ $audio == "yes" ]]; then
+		# install pulseaudio-utils to audio management for Ubuntu 22.04 due to out-dated wireplumber packages
+		if [[ ! $(cat /etc/os-release | awk 'NR==3' | cut -c12- | sed s/\"//g) == "22.04" ]]; then
+			sudo apt-get install pipewire pipewire-pulse wireplumber -y
+			rm $HOME/.config/sway/config.d/keybindings_pactl
+		else
+			sudo apt-get install pipewire pipewire-media-session pulseaudio pulseaudio-utils -y
+			rm $HOME/.config/sway/config.d/keybindings_wpctl
+		fi
+	fi
+
+	# optional to insstall the extra packages
+	if [[ $extra_pkg == "yes" ]]; then
+		sudo apt-get install thunar gvfs gvfs-backends thunar-archive-plugin thunar-media-tags-plugin avahi-daemon \
+			lximage-qt geany qpdfview -y
+	fi
+
+	# optional install NetworkManager
+	if [[ $nm == yes ]]; then
+	sudo apt-get install network-manager -y
+		if [[ -n "$(uname -a | grep Ubuntu)" ]]; then
+			for file in `find /etc/netplan/* -maxdepth 0 -type f -name *.yaml`; do
+				sudo mv $file $file.bak
+			done
+			echo -e "# Let NetworkManager manage all devices on this system\nnetwork:\n  version: 2\n  renderer: NetworkManager" | \
+				sudo tee /etc/netplan/01-network-manager-all.yaml
+		else
+			sudo cp /etc/NetworkManager/NetworkManager.conf /etc/NetworkManager/NetworkManager.conf.bak
+			sudo sed -i 's/managed=false/managed=true/g' /etc/NetworkManager/NetworkManager.conf
+			sudo mv /etc/network/interfaces /etc/network/interfaces.bak
+			sudo cp ./config/interfaces /etc/network/interfaces
+			sudo systemctl disable networking.service
+		fi
+	fi
+
 }
 
 printf "\n"

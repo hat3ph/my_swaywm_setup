@@ -45,7 +45,7 @@ gtk-font-name=Sans Serif 9
 For QT, use `qt5ct` to change QT applications theme.
 
 ## Ubuntu 22.04 Bugs (Can ignore this if using Ubuntu 23.04 or Debian 12)
-- Ubuntu 22.04 come with wireplumber-0.4.8 that do not have the get-volume function. If you don't minds loosing the audio volume level at your swaybar, continue to use wireplumber for audio management, or just set `wireplumber=no` and it will install pulseaudio-utils for audio management.
+- Ubuntu 22.04 come with wireplumber-0.4.8 that do not have the get-volume function. Until the updated version of wireplumber is available for Ubuntu 22.04, I will use pulseaudio-utils instead for audio management.
 
 ![image](https://github.com/hat3ph/my_swaywm_setup/assets/88069788/7795728c-f461-40a5-95cb-9aca3c99ca72)
 
