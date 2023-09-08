@@ -14,7 +14,7 @@ install () {
 	sudo apt-get update && sudo apt-get upgrade -y
 	sudo apt-get install sway swaybg swayidle swaylock xdg-desktop-portal-wlr xwayland foot suckless-tools \
 		fonts-noto-color-emoji fonts-font-awesome mako-notifier libnotify-bin grim imagemagick nano less iputils-ping \
-		adwaita-icon-theme papirus-icon-theme qt5ct -y
+		adwaita-icon-theme papirus-icon-theme qt5ct grimshot xdg-utils -y
 
 	# use pipewire with wireplumber or pulseaudio-utils
 	if [[ $audio == "yes" ]]; then
@@ -67,16 +67,20 @@ install () {
 	fi
 
 	# enable autostart swaywm after TUI login
+	sudo cp ./config/start_swaywm.sh /usr/local/bin/start_swaywm.sh
+	sudo chmod +x /usr/local/bin/start_swaywm.sh
 	if [[ $autostart_sway == "yes" ]]; then
 		if [[ -f $HOME/.bashrc ]]; then cp $HOME/.bashrc $HOME/.bashrc_`date +%Y_%d_%m_%H_%M_%S`; fi
-		sudo cp ./config/start_swaywm.sh /usr/local/bin/start_swaywm.sh
-		sudo chmod +x /usr/local/bin/start_swaywm.sh
 		echo -e '\n#If running from tty1 start sway\n[ "$(tty)" = "/dev/tty1" ] && /usr/local/bin/start_swaywm.sh' >> $HOME/.bashrc
 	fi
 
 	# configure gtk theme for sway/wayland
 	mkdir -p $HOME/.config/gtk-3.0
 	cp ./config/settings.ini $HOME/.config/gtk3.0/settings.ini
+
+	# create default application mimeapps.list
+	mkdir -p $HOME/.config
+	cp ./config/mimeapps.list $HOME/.config/mimeapps.list
 }
 
 printf "\n"
@@ -94,7 +98,7 @@ printf "88888888888888888888888888888\n"
 while true; do
 read -p "Do you want to proceed with above settings? (y/n) " yn
 	case $yn in
-		[yY] ) echo ok, we will proceed; install; echo "Remember to reboot system after installation!";
+		[yY] ) echo ok, we will proceed; install; echo "Remember to reboot system after the installation!";
 			break;;
 		[nN] ) echo exiting...;
 			exit;;

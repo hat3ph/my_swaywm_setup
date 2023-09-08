@@ -177,3 +177,10 @@ bindsym $mod+Shift+End exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
 # dmenu power options keybinds
 #
 bindsym $mod+Shift+delete exec $HOME/.config/sway/scripts/dmenu_power_options.sh
+
+#
+# screenshot using grimshot
+#
+bindsym Print exec $HOME/.config/sway/scripts/swayshot.
+bindsym Shift+Print exec $HOME/.config/sway/scripts/swayshot.sh -a
+bindsym Alt+Print exec $HOME/.config/sway/scripts/swayshot.sh -w
