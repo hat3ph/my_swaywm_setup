@@ -25,10 +25,10 @@ By default, it will auto install the sway wm packages. If your Ubuntu/Debian bas
 my_swaywm_config=yes # set no if just want an empty swaywm setup
 audio=yes # set no if do not want to use pipewire audio server
 wireplumber=yes # set no if want to use pulseaudio-utils for pipewire audio management
-thunar=yes # set no if do not want to use thunar file manager
+extra_pkg=yes # set no if do not want to install the extra packages
 nm=yes # set no if do not want to use network-manager for network interface management
 nano_config=yes # set no if do not want to configure nano text editor
-autostart_sway=yes # set no to not autostart swaywm once TUI login
+autostart_sway=yes # set no to not autostart swaywm once TUI
 ```
 ## Login Manager
 SDDM work on sway but I notice it will pull xorg packages as dependency. So I just configure to auto run sway after TUI login.

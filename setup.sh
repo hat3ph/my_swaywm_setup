@@ -4,7 +4,7 @@
 my_swaywm_config=yes # set no if just want an empty swaywm setup
 audio=yes # set no if do not want to use pipewire audio server
 wireplumber=yes # set no if want to use pulseaudio-utils for pipewire audio management
-thunar=yes # set no if do not want to use thunar file manager
+extra_pkg=yes # set no if do not want to install the extra packages
 nm=yes # set no if do not want to use network-manager for network interface management
 nano_config=yes # set no if do not want to configure nano text editor
 autostart_sway=yes # set no to not autostart swaywm once TUI
@@ -25,9 +25,10 @@ install () {
 		fi
 	fi
 
-	# optional install thunar and extra packages
-	if [[ $thunar == "yes" ]]; then
-		sudo apt-get install thunar gvfs gvfs-backends thunar-archive-plugin thunar-media-tags-plugin avahi-daemon -y
+	# optional to insstall the extra packages
+	if [[ $extra_pkg == "yes" ]]; then
+		sudo apt-get install thunar gvfs gvfs-backends thunar-archive-plugin thunar-media-tags-plugin avahi-daemon \
+			lximage-qt geany -y
 	fi
 
 	# optional install NetworkManager
