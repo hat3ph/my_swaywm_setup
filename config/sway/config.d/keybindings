@@ -151,6 +151,6 @@ bindsym $mod+Shift+delete exec $HOME/.config/sway/scripts/dmenu_power_options.sh
 #
 # screenshot using grimshot
 #
-bindsym Print exec $HOME/.config/sway/scripts/swayshot.
+bindsym Print exec $HOME/.config/sway/scripts/swayshot.sh
 bindsym Shift+Print exec $HOME/.config/sway/scripts/swayshot.sh -a
 bindsym Alt+Print exec $HOME/.config/sway/scripts/swayshot.sh -w
