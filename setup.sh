@@ -13,7 +13,7 @@ install () {
 	sudo apt-get update && sudo apt-get upgrade -y
 	sudo apt-get install sway swaybg swayidle swaylock xdg-desktop-portal-wlr xwayland foot suckless-tools \
 		fonts-noto-color-emoji fonts-font-awesome mako-notifier libnotify-bin grim imagemagick nano less iputils-ping \
-		adwaita-icon-theme papirus-icon-theme qt5ct grimshot xdg-utils qtwayland5 -y
+		adwaita-icon-theme papirus-icon-theme qt5ct grimshot xdg-utils xdg-user-dirs qtwayland5 -y
 
 	# copy my swaywm and mako configuration
 	if [[ $my_swaywm_config == "yes" ]]; then
