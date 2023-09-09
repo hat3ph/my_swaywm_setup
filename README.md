@@ -34,14 +34,7 @@ SDDM work on sway but I notice it will pull xorg packages as dependency. So I ju
 If you want to use your prefered login manager, set `autostart_sway=no` and install your login manager manually afterward.
 
 ## GTK & QT Theming
-Since there is no official wayland GTK3 theme configurator in Ubuntu/Debian yet, you have to edit `$HOME/.config/gtk-3.0/settings.ini` to change the icon theme.
-```
-gtk-theme-name=Papirus
-gtk-application-prefer-dark-theme=true
-gtk-icon-theme-name=Papirus-Dark
-gtk-cursor-theme-name=Papirus
-gtk-font-name=Sans Serif 9
-```
+For GTK, use `lxappearance` to change GTK applications theme.
 For QT, use `qt5ct` to change QT applications theme.
 
 ## Ubuntu 22.04 Bugs (Can ignore this if using Ubuntu 23.04 or Debian 12)

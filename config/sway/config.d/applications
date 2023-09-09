@@ -2,4 +2,7 @@
 for_window [app_id="foor"] opacity $opacity
 
 # set floating windows
+# use `swaymsg -t get_tree | grep app_id or `swaymsg -t get_tree | grep class` to get the class or app_id
 for_window [app_id="software-properties-gtk"] floating enable
+for_window [class="Lxappearance"] floating enable
+for_window [app_id="qt5ct"] floating enable
