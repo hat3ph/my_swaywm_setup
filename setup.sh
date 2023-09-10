@@ -37,7 +37,7 @@ install () {
 	sudo cp ./config/start_swaywm.sh /usr/local/bin/start_swaywm.sh
 	sudo chmod +x /usr/local/bin/start_swaywm.sh
 	sudo mkdir -p /etc/profile.d
-	sudo cp ./config/sway_env.sh /etc/profile.d/sway_env.h
+	sudo cp ./config/sway_env.sh /etc/profile.d/sway_env.sh
 	if [[ $autostart_sway == "yes" ]]; then
 		if [[ -f $HOME/.bashrc ]]; then cp $HOME/.bashrc $HOME/.bashrc_`date +%Y_%d_%m_%H_%M_%S`; fi
 		echo -e '\n#If running from tty1 start sway\n[ "$(tty)" = "/dev/tty1" ] && exec sway' >> $HOME/.bashrc
