@@ -14,8 +14,8 @@
     # Start firefox browser
     #bindsym $mod+Shift+w exec $browser
 	
-	# Start thunar file manager
-	#bindsym $mod+Shift+f exec $filemanager
+    # Start thunar file manager
+    #bindsym $mod+Shift+f exec $filemanager
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -28,8 +28,8 @@
     bindsym $mod+Shift+c reload
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
-    #bindsym $mod+Shift+e exec swaymsg exit
+    #bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+    bindsym $mod+Shift+e exec $HOME/.config/sway/scripts/dmenu_power_options.sh
 #
 # Moving around:
 #
@@ -144,13 +144,8 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 #
-# dmenu power options keybinds
-#
-bindsym $mod+Shift+delete exec $HOME/.config/sway/scripts/dmenu_power_options.sh
-
-#
 # screenshot using grimshot
 #
-bindsym Print exec $HOME/.config/sway/scripts/swayshot.sh
-bindsym Shift+Print exec $HOME/.config/sway/scripts/swayshot.sh -a
-bindsym Alt+Print exec $HOME/.config/sway/scripts/swayshot.sh -w
+bindsym Print exec $HOME/.config/sway/scripts/swayshot.sh # current output
+bindsym Shift+Print exec $HOME/.config/sway/scripts/swayshot.sh -a # select area
+bindsym Alt+Print exec $HOME/.config/sway/scripts/swayshot.sh -w # current windows
