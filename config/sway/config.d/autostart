@@ -6,3 +6,7 @@ exec mako
 
 # autostart thunar as daemon
 #exec thunar --daemon
+
+# fix GTK apps slow launch
+# https://github.com/swaywm/sway/issues/5732
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
