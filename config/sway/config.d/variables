@@ -29,3 +29,16 @@ seat * hide_cursor 8000
 
 # disable windows focus on mouse
 focus_follows_mouse no
+
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $ws1 "1:Terminal"
+set $ws2 "2:Work"
+set $ws3 "3:Web"
+set $ws4 "4:Thunar"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
