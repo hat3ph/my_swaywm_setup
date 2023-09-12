@@ -2,6 +2,7 @@
 for_window [app_id="foor"] opacity $opacity
 
 # Auto allocate applications to dedicated workspace and focus
+for_window [app_id="foot"] move to workspace $ws1, focus
 for_window [app_id="geany"] move to workspace $ws2, focus
 for_window [app_id="Firefox-esr"] move to workspace $ws3, focus
 for_window [app_id="thunar"] move to workspace $ws4, focus
