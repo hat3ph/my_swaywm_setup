@@ -34,7 +34,8 @@ SDDM work on sway but I notice it will pull xorg packages as dependency. So I ju
 If you want to use your prefered login manager, set `autostart_sway=no` and install your login manager manually afterward.
 
 ## GTK & QT Theming
-For GTK, use `lxappearance` to change GTK applications theme.
+For GTK, use `lxappearance` to change GTK applications theme. Remember to restart sway config for it to take effect.
+
 For QT, use `qt5ct` to change QT applications theme.
 
 ## Ubuntu 22.04 Bugs (Can ignore this if using Ubuntu 23.04 or Debian 12)

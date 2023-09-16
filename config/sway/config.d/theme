@@ -1,4 +1,4 @@
-exec_always $HOME/.config/scripts/import_gtk3_gsettings.sh
+exec_always $HOME/.config/sway/scripts/import_gtk3_gsettings.sh
 
 # theme from https://github.com/rkubosz/base16-sway
 ## Base16 Nord
