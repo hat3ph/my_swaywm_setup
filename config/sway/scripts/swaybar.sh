@@ -46,7 +46,8 @@ fi
 
 # check total cpu usage and temp
 cpu_usage="$[100-$(vmstat 1 2|tail -1|awk '{print $15}')]"%
-cpu_temp=$(cat /sys/class/thermal/thermal_zone0/temp)
+#cpu_temp=$(cat /sys/class/thermal/thermal_zone0/temp)
+cpu_temp=$(cat /sys/class/hwmon/hwmon3/temp1_input)
 cpu_temp=$(($cpu_temp/1000))
 
 # check total memory usage
