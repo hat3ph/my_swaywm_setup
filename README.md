@@ -59,6 +59,7 @@ Pls refer to [sway man page](https://man.archlinux.org/man/sway.5) for more info
 - [Swaybar example](https://unix.stackexchange.com/questions/473788/simple-swaybar-example)
 - [Daniel W Armstong](https://www.dwarmstrong.org/sway/)
 - [Sway's Wiki](https://github.com/swaywm/sway/wiki)
+- [Awesome Font v4 emoji](https://fontawesome.com/v4/cheatsheet/)
 - [emoji1](https://github.com/dln/wofi-emoji/blob/master/wofi-emoji)
 - [emoji2](https://gist.github.com/Sebas-h/36ad7fa40c39a28ba00dedd2cf1d4e8e)
 - [emoji3](https://git.sr.ht/~earboxer/dotfiles/tree/master/item/.config/sxmo/hooks/sxmo_hook_icons.sh)

@@ -1,12 +1,18 @@
 #!/bin/bash
 
 # optional components installation
-my_swaywm_config=yes # set no if just want an empty swaywm setup
-audio=yes # set no if do not want to use pipewire audio server
-extra_pkg=yes # set no if do not want to install the extra packages
-nm=yes # set no if do not want to use network-manager for network interface management
-nano_config=yes # set no if do not want to configure nano text editor
-autostart_sway=yes # set no to not autostart swaywm once TUI
+# set no if just want an empty swaywm setup
+my_swaywm_config=yes
+# set no if do not want to use pipewire audio server
+audio=yes
+# set no if do not want to install the extra packages
+extra_pkg=yes
+# set no if do not want to use network-manager for network interface management
+nm=yes
+# set no if do not want to configure nano text editor
+nano_config=no
+# set no to not autostart swaywm once TUI
+autostart_sway=yes
 
 install () {
 	# install swaywm and other packages
