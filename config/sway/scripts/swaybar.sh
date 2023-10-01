@@ -49,12 +49,12 @@ else
 		volume_emoji=🔊
 		volume_level=$(pactl list sinks | grep Volume | head -n1 | awk '{print $5}')
 	fi
-	if [[ $(pactl list sinks | grep Mute: | awk '{print $2}') == "yes" ]]; then
+	if [[ $(pactl list sources | grep Mute: | awk '{print $2}') == "yes" ]]; then
 		mic_emoji=
 		mic_level="MUTED"
 	else
 		mic_emoji=
-		mic_level=$(pactl list sinks | grep Volume | head -n1 | awk '{print $5}')
+		mic_level=$(pactl list sources | grep Volume | head -n1 | awk '{print $5}')
 	fi
 fi
 
