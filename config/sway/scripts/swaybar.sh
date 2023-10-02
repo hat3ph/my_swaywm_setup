@@ -42,26 +42,26 @@ if [[ ! $(command -v pactl) ]]; then
 		mic_level=$(wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | cut -d ' ' -f 2 | awk '{printf "%2.0f%%\n", 100 * $1}')
 	fi
 else
-	if [[ $(pactl list sinks | grep Mute: | awk '{print $2}') == "yes" ]]; then
+	if [[ $(pactl get-sink-mute @DEFAULT_SINK@ | awk '{print $2}') == "yes" ]]; then
 		volume_emoji=🔇
 		volume_level="MUTED"
 	else
 		volume_emoji=🔊
-		volume_level=$(pactl list sinks | grep Volume | head -n1 | awk '{print $5}')
+		volume_level=$(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}')
 	fi
-	if [[ $(pactl list sources | grep Mute: | awk '{print $2}') == "yes" ]]; then
+	if [[ $(pactl get-source-mute @DEFAULT_SOURCE@ | awk '{print $2}') == "yes" ]]; then
 		mic_emoji=
 		mic_level="MUTED"
 	else
 		mic_emoji=
-		mic_level=$(pactl list sources | grep Volume | head -n1 | awk '{print $5}')
+		mic_level=$(pactl get-source-volume @DEFAULT_SOURCE@ | awk '{print $5}')
 	fi
 fi
 
 # check total cpu usage and temp
 cpu_usage="$[100-$(vmstat 1 2|tail -1|awk '{print $15}')]"%
-#cpu_temp=$(cat /sys/class/thermal/thermal_zone0/temp)
-cpu_temp=$(cat /sys/class/hwmon/hwmon3/temp1_input)
+cpu_temp=$(cat /sys/class/thermal/thermal_zone0/temp)
+#cpu_temp=$(cat /sys/class/hwmon/hwmon3/temp1_input)
 cpu_temp=$(($cpu_temp/1000))°C
 
 # check total memory usage
@@ -89,5 +89,5 @@ if [[ -d /sys/class/power_supply/BAT0 ]]; then
 fi
 
 # output to swaybar
-echo $cpu_emoji $cpu_usage $cpu_temp°C $mem_emoji $mem_usage $net_emoji $net_info $battery_emoji $battery_status $battery_capacity% \
+echo $cpu_emoji $cpu_usage $cpu_temp $mem_emoji $mem_usage $net_emoji $net_info $battery_emoji $battery_status $battery_capacity \
 		$mic_emoji $mic_level $volume_emoji $volume_level $date_emoji $date_formatted
