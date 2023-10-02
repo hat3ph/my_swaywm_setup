@@ -22,12 +22,17 @@ Before start the installation, recommend to check out `setup.sh` and disable/ena
 By default, it will auto install the sway wm packages. If your Ubuntu/Debian base OS is using the minimal server ISO installation, recommend to install all to have a proper functional system. 
 ```
 # optional components installation
-my_swaywm_config=yes # set no if just want an empty swaywm setup
-audio=yes # set no if do not want to use pipewire audio server
-extra_pkg=yes # set no if do not want to install the extra packages
-nm=yes # set no if do not want to use network-manager for network interface management
-nano_config=yes # set no if do not want to configure nano text editor
-autostart_sway=yes # set no to not autostart swaywm once TUI
+my_swaywm_config=yes
+# set no if do not want to use pipewire audio server
+audio=yes
+# set no if do not want to install the extra packages
+extra_pkg=yes
+# set no if do not want to use network-manager for network interface management
+nm=yes
+# set no if do not want to configure nano text editor
+nano_config=no
+# set no to not autostart swaywm once TUI
+autostart_sway=yes
 ```
 ## Login Manager
 SDDM work on sway but I notice it will pull xorg packages as dependency. So I just configure to auto run sway after TUI login.
