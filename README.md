@@ -1,6 +1,6 @@
 # My SwayWM Setup
 
-I want to test out wayland and this is my Sway WN setup on Ubuntu 22.04/23.04 and Debian 12.
+I want to test out wayland and this is my Sway WM setup on Ubuntu 22.04/23.04 and Debian 12.
 
 I test this installation script using Ubuntu 22.04/23.04 and Debian 12 minimal based installation.
 
