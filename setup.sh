@@ -1,25 +1,20 @@
 #!/bin/bash
 
 # optional components installation
-# set no if just want an empty swaywm setup
-my_swaywm_config=yes
-# set no if do not want to use pipewire audio server
-audio=yes
-# set no if do not want to install the extra packages
-extra_pkg=yes
-# set no if do not want to use network-manager for network interface management
-nm=yes
-# set no if do not want to configure nano text editor
-nano_config=no
-# set no to not autostart swaywm once TUI
-autostart_sway=yes
+my_swaywm_config=yes # set no if just want an empty swaywm setup
+audio=yes # set no if do not want to use pipewire audio server
+thunar=yes # set no if do not want to install thunar file manager
+nm=yes # set no if do not want to use network-manager for network interface management
+nano_config=no # set no if do not want to configure nano text editor
+autostart_sway=yes # set no to not autostart swaywm once TUI
+firefox_deb=yes # install non snap firefox
 
 install () {
 	# install swaywm and other packages
 	sudo apt-get update && sudo apt-get upgrade -y
 	sudo apt-get install sway swaybg swayidle swaylock xdg-desktop-portal-wlr xwayland foot suckless-tools \
 		fonts-noto-color-emoji fonts-font-awesome mako-notifier libnotify-bin grim imagemagick nano less iputils-ping \
-		adwaita-icon-theme papirus-icon-theme qt5ct lxappearance grimshot xdg-utils xdg-user-dirs qtwayland5 -y
+		adwaita-icon-theme papirus-icon-theme qt5ct lxappearance grimshot xdg-utils xdg-user-dirs qtwayland5 gpicview gv geany -y
 
 	# copy my swaywm and mako configuration
 	if [[ $my_swaywm_config == "yes" ]]; then
@@ -70,14 +65,13 @@ install () {
 	fi
 
 	# optional to insstall the extra packages
-	if [[ $extra_pkg == "yes" ]]; then
-		sudo apt-get install thunar gvfs gvfs-backends thunar-archive-plugin thunar-media-tags-plugin avahi-daemon \
-			lximage-qt geany qpdfview -y
+	if [[ $thunar == "yes" ]]; then
+		sudo apt-get install thunar gvfs gvfs-backends thunar-archive-plugin thunar-media-tags-plugin avahi-daemon -y
 	fi
 
 	# optional install NetworkManager
 	if [[ $nm == yes ]]; then
-	sudo apt-get install network-manager -y
+		sudo apt-get install network-manager -y
 		if [[ -n "$(uname -a | grep Ubuntu)" ]]; then
 			for file in `find /etc/netplan/* -maxdepth 0 -type f -name *.yaml`; do
 				sudo mv $file $file.bak
@@ -88,11 +82,31 @@ install () {
 			sudo cp /etc/NetworkManager/NetworkManager.conf /etc/NetworkManager/NetworkManager.conf.bak
 			sudo sed -i 's/managed=false/managed=true/g' /etc/NetworkManager/NetworkManager.conf
 			sudo mv /etc/network/interfaces /etc/network/interfaces.bak
-			sudo cp ./config/interfaces /etc/network/interfaces
+			head -9 /etc/network/interfaces.bak | sudo tee /etc/network/interfaces
 			sudo systemctl disable networking.service
 		fi
 	fi
 
+	# install firefox without snap
+ 	# https://www.omgubuntu.co.uk/2022/04/how-to-install-firefox-deb-apt-ubuntu-22-04
+	if [[ $firefox_deb == "yes" ]]; then
+		if [[ -n "$(uname -a | grep Ubuntu)" ]]; then
+			sudo install -d -m 0755 /etc/apt/keyrings
+			wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- | \
+				sudo tee /etc/apt/keyrings/packages.mozilla.org.asc > /dev/null
+			echo "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main" | \
+				sudo tee -a /etc/apt/sources.list.d/mozilla.list > /dev/null
+			echo -e "Package: *\nPin: origin packages.mozilla.org\nPin-Priority: 1000" | \
+				sudo tee /etc/apt/preferences.d/mozilla
+			sudo apt-get update && sudo apt-get install firefox -y
+		else
+			sudo apt-get install firefox-esr -y
+		fi
+  	fi
+  	
+  	# disable unused services
+ 	sudo systemctl disable systemd-networkd-wait-online.service
+  	sudo systemctl disable multipathd.service
 }
 
 printf "\n"
@@ -100,8 +114,9 @@ printf "Start installation!!!!!!!!!!!\n"
 printf "88888888888888888888888888888\n"
 printf "My Custom Swaywm Config : $my_swaywm_config\n"
 printf "Pipewire Audio          : $audio\n"
-printf "Extra Packages          : $extra_pkg\n"
+printf "Thunar File Manager     : $thunar\n"
 printf "NetworkManager          : $nm\n"
+printf "Firefox (non snap)      : $firefox_deb\n"
 printf "Nano's configuration    : $nano_config\n"
 printf "Autostart SwayWM        : $autostart_sway\n"
 printf "88888888888888888888888888888\n"
