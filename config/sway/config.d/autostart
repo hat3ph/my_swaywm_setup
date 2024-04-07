@@ -2,10 +2,10 @@
 exec mako
 
 # autostart copyq clipboard manager
-#exec copyq
+exec copyq
 
 # autostart thunar as daemon
-#exec thunar --daemon
+exec thunar --daemon
 
 # fix GTK apps slow launch
 # https://github.com/swaywm/sway/issues/5732
