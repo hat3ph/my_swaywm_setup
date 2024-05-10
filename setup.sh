@@ -17,7 +17,7 @@ install () {
 		sudo apt-get install sway swaybg swayidle swaylock xdg-desktop-portal-wlr xwayland foot suckless-tools \
 			fonts-noto-color-emoji fonts-font-awesome mako-notifier libnotify-bin grim imagemagick nano less \
 			iputils-ping adwaita-icon-theme papirus-icon-theme qt5ct lxappearance grimshot xdg-utils \
-				xdg-user-dirs qtwayland5 gpicview gv geany rsyslog logrotate -y
+			curl xdg-user-dirs qtwayland5 gpicview gv geany rsyslog logrotate -y
 	fi
 
 	# copy my swaywm and mako configuration
