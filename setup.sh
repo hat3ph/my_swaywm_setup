@@ -18,6 +18,9 @@ install () {
 			fonts-noto-color-emoji fonts-font-awesome mako-notifier libnotify-bin grim imagemagick nano less \
 			iputils-ping adwaita-icon-theme papirus-icon-theme qt5ct lxappearance grimshot xdg-utils \
 			curl xdg-user-dirs qtwayland5 gpicview gv geany rsyslog logrotate -y
+   		# install acpid
+     		sudo apt-get install acpid -y
+       		sudo systemctl enable acpid
 	fi
 
 	# copy my swaywm and mako configuration
@@ -39,11 +42,12 @@ install () {
 	fi
 
 	# enable autostart swaywm after TUI login
-	sudo cp ./config/start_swaywm.sh /usr/local/bin/start_swaywm.sh
-	sudo chmod +x /usr/local/bin/start_swaywm.sh
-	#sudo mkdir -p /etc/profile.d
-	#sudo cp ./config/sway_env.sh /etc/profile.d/sway_env.sh
-	if [[ $autostart_sway == "yes" ]]; then
+ 	if [[ $autostart_sway == "yes" ]]; then
+		sudo cp ./config/start_swaywm.sh /usr/local/bin/start_swaywm.sh
+		sudo chmod +x /usr/local/bin/start_swaywm.sh
+		#sudo mkdir -p /etc/profile.d
+		#sudo cp ./config/sway_env.sh /etc/profile.d/sway_env.sh
+
 		if [[ -f $HOME/.bashrc ]]; then cp $HOME/.bashrc $HOME/.bashrc_`date +%Y_%d_%m_%H_%M_%S`; fi
 		echo -e '\n#If running from tty1 start sway\n[ "$(tty)" = "/dev/tty1" ] && exec /usr/local/bin/start_swaywm.sh' >> $HOME/.bashrc
 	fi
